@@ -82,6 +82,9 @@ function App() {
       )}
 
       <Image src={genie} maxW={250} mt={25} mb={50} />
+      <Text mb={20}>
+        Subscribe to receive arrival updates and free hitting advice.
+      </Text>
 
       <HStack spacing={0}>
         <Input
