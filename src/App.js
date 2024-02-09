@@ -82,7 +82,7 @@ function App() {
       )}
 
       <Image src={genie} maxW={250} mt={25} mb={50} />
-      <Text mb={20}>
+      <Text mb={20} px={10}>
         Subscribe to receive arrival updates and free hitting advice.
       </Text>
 
