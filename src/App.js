@@ -111,7 +111,7 @@ function App() {
       {error && <Text color="red">Please enter a valid e-mail address.</Text>}
       <Modal isOpen={isModalOpen} onClose={handleClose}>
         <ModalOverlay />
-        <ModalContent maxW={"75%"} maxH="500" >
+        <ModalContent maxW="90vw" maxH="90vh">
           <ModalCloseButton />
           <ModalBody>
             <Center>
@@ -119,18 +119,28 @@ function App() {
             </Center>
             <ModalHeader textAlign="center">
               <u>About</u>
-            </ModalHeader>
-            The Hitting Genie is a mobile hitting application that allows you to
-            interact through a series of questions and answers to improve your
-            hitting of a baseball and softball quickly in realtime. It is based
-            on The Barca Method of Hitting, a formula proven to expedite hitting
-            development and long term retention. <br /> <br /> The Hitting Genie
-            is the creation of Brian Barca, founder of The Hitting Upgrade and
-            TK Baseball and Softball. He is a hitting coach who works with
-            players from youth through professional levels all over the United
-            States.  <br/>  <br/> The Hitting Genie will arrive in 2024 and is the first of
-            its kind resource designed to make hitting easier and instructional
-            knowledge more affordable.
+            </ModalHeader>{" "}
+            <Box
+              maxHeight="300px"
+              overflowY="auto"
+              padding="0.5rem"
+              whiteSpace="pre-line"
+            >
+              <Text>
+                The Hitting Genie is a mobile hitting application that allows
+                you to interact through a series of questions and answers to
+                improve your hitting of a baseball and softball quickly in
+                realtime. It is based on The Barca Method of Hitting, a formula
+                proven to expedite hitting development and long term retention.
+                <br /> <br /> The Hitting Genie is the creation of Brian Barca,
+                founder of The Hitting Upgrade and TK Baseball and Softball. He
+                is a hitting coach who works with players from youth through
+                professional levels all over the United States. <br /> <br />{" "}
+                The Hitting Genie will arrive in 2024 and is the first of its
+                kind resource designed to make hitting easier and instructional
+                knowledge more affordable.
+              </Text>
+            </Box>
           </ModalBody>
         </ModalContent>
       </Modal>
