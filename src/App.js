@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import genie from "./genietm.png";
 import { database } from "./firebase";
-import { ref, set, child, get } from "firebase/database";
+import { ref, get } from "firebase/database";
 import {
   Text,
   Image,
@@ -18,6 +18,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import "./App.css";
+import axios from "axios";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -25,6 +26,7 @@ function App() {
   const [success, showSuccess] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [aboutContent, setAboutContent] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     const aboutRef = ref(database, "about");
@@ -41,10 +43,6 @@ function App() {
       });
   }, []);
 
-  const encodeEmail = (email) => {
-    return btoa(email).replace(/=/g, "");
-  };
-
   const handleAbout = () => {
     setIsModalOpen(true);
   };
@@ -53,25 +51,46 @@ function App() {
     setIsModalOpen(false);
   };
 
+  const addMember = async (email) => {
+    try {
+      const response = await axios.post(
+        "https://hgapi.vercel.app/api/users/subscribe",
+        {
+          email: email,
+          status: "subscribed",
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error adding member to list:", error);
+      throw error;
+    }
+  };
+
   const handleSaveEmail = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (email === "" || !emailRegex.test(email)) {
+      setErrorMsg("Please enter a valid e-mail address.");
       showError(true);
       return;
     }
 
-    const mappingRef = ref(database, "emails");
-    const encodedEmail = encodeEmail(email);
-
     try {
-      await set(child(mappingRef, encodedEmail), email);
+      await addMember(email);
       showSuccess(true);
+      showError(false);
     } catch (error) {
       console.error("Error saving email:", error);
+      if (error.response && error.response.status === 500) {
+        setErrorMsg(
+          "This e-mail is already in use. Please try again with a different e-mail."
+        );
+      } else {
+        setErrorMsg("An error occurred. Please try again later.");
+      }
       showError(true);
       showSuccess(false);
-      return;
     }
   };
 
@@ -126,7 +145,7 @@ function App() {
         </Button>
       </HStack>
 
-      {error && <Text color="red">Please enter a valid e-mail address.</Text>}
+      {error && <Text color="red">{errorMsg}</Text>}
       <Modal isOpen={isModalOpen} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent maxW="90vw" maxH="90vh">
