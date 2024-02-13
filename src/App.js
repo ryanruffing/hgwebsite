@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import genie from "./genietm.png";
 import { database } from "./firebase";
 import { ref, get } from "firebase/database";
+import { Helmet } from "react-helmet";
+
 import {
   Text,
   Image,
@@ -95,80 +97,92 @@ function App() {
   };
 
   return (
-    <Center minH="100vh" flexDirection="column">
-      <Box position="absolute" top="20px" left="20px">
-        <Button
-          fontFamily="Arial"
-          bgColor="#FF4E00"
-          color="black"
-          borderColor="#FF4E00"
-          borderRadius="5"
-          _hover={{ bgColor: "gray.800" }}
-          onClick={handleAbout}
-        >
-          About
-        </Button>
-      </Box>
-      {success && (
-        <Text color={"green"} fontSize={25} pt={20} ml={10} mr={10}>
-          Successfully subscribed! We will be in touch when updates appear.
-        </Text>
-      )}
-
-      <Image src={genie} maxW={250} mt={25} mb={50} />
-      <Text mb={20} px={10}>
-        Subscribe to receive arrival updates and free hitting advice.
-      </Text>
-
-      <HStack spacing={0}>
-        <Input
-          backgroundColor={"black"}
-          fontFamily={"arial"}
-          textColor={"white"}
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          focusBorderColor="#FF4E00"
-          placeholderTextColor="white"
+    <>
+      <Helmet>
+        <title>Hitting Genie</title>
+        <link
+          rel="icon"
+          type="image/png"
+          href="%PUBLIC_URL%/favicon.ico"
+          sizes="16x16"
         />
-        <Button
-          fontFamily={"Arial"}
-          onClick={handleSaveEmail}
-          bgColor="#FF4E00"
-          color="black"
-          borderColor="#FF4E00"
-          borderRadius="5"
-          _hover={{ bgColor: "gray.800" }}
-        >
-          Sign Up
-        </Button>
-      </HStack>
+      </Helmet>
 
-      {error && <Text color="red">{errorMsg}</Text>}
-      <Modal isOpen={isModalOpen} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent maxW="90vw" maxH="90vh">
-          <ModalCloseButton />
-          <ModalBody>
-            <Center>
-              <Image src={genie} maxW={150} mb={4} />
-            </Center>
-            <ModalHeader textAlign="center">
-              <u>About</u>
-            </ModalHeader>{" "}
-            <Box
-              maxHeight="300px"
-              overflowY="auto"
-              padding="0.5rem"
-              whiteSpace="pre-line"
-            >
-              <Text>{aboutContent}</Text>
-            </Box>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </Center>
+      <Center minH="100vh" flexDirection="column">
+        <Box position="absolute" top="20px" left="20px">
+          <Button
+            fontFamily="Arial"
+            bgColor="#FF4E00"
+            color="black"
+            borderColor="#FF4E00"
+            borderRadius="5"
+            _hover={{ bgColor: "gray.800" }}
+            onClick={handleAbout}
+          >
+            About
+          </Button>
+        </Box>
+        {success && (
+          <Text color={"green"} fontSize={25} pt={20} ml={10} mr={10}>
+            Successfully subscribed! We will be in touch when updates appear.
+          </Text>
+        )}
+
+        <Image src={genie} maxW={250} mt={25} mb={50} />
+        <Text mb={20} px={10}>
+          Subscribe to receive arrival updates and free hitting advice.
+        </Text>
+
+        <HStack spacing={0}>
+          <Input
+            backgroundColor={"black"}
+            fontFamily={"arial"}
+            textColor={"white"}
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            focusBorderColor="#FF4E00"
+            placeholderTextColor="white"
+          />
+          <Button
+            fontFamily={"Arial"}
+            onClick={handleSaveEmail}
+            bgColor="#FF4E00"
+            color="black"
+            borderColor="#FF4E00"
+            borderRadius="5"
+            _hover={{ bgColor: "gray.800" }}
+          >
+            Sign Up
+          </Button>
+        </HStack>
+
+        {error && <Text color="red">{errorMsg}</Text>}
+        <Modal isOpen={isModalOpen} onClose={handleClose}>
+          <ModalOverlay />
+          <ModalContent maxW="90vw" maxH="90vh">
+            <ModalCloseButton />
+            <ModalBody>
+              <Center>
+                <Image src={genie} maxW={150} mb={4} />
+              </Center>
+              <ModalHeader textAlign="center">
+                <u>About</u>
+              </ModalHeader>{" "}
+              <Box
+                maxHeight="300px"
+                overflowY="auto"
+                padding="0.5rem"
+                whiteSpace="pre-line"
+              >
+                <Text>{aboutContent}</Text>
+              </Box>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </Center>
+    </>
   );
 }
 
