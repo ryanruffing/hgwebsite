@@ -125,19 +125,24 @@ function App() {
         />
       </Helmet>
       <Center mt={10}>
-      <Text
+        <Text
+          marginLeft={24}
           px={10}
-          fontSize={[100, 75, 50, 24]}
+          fontSize={[75, 75, 30, 24]}
           fontWeight={"bold"}
-          align={"center"}
+          align={"end"}
         >
           Now available for iOS!
         </Text>
-        <a href="https://apps.apple.com/us/app/hitting-genie/id6478901041" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://apps.apple.com/us/app/hitting-genie/id6478901041"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image src="appStore.png" alt="Download on the App Store" />
         </a>
       </Center>
-      
+
       <Center minH="75vh" flexDirection="column">
         <Box position="absolute" top="20px" left="20px">
           <Button
@@ -153,14 +158,14 @@ function App() {
             About
           </Button>
         </Box>
-        
+
         <Image
           src={genie}
           maxW={{ base: "20", md: "80%", lg: "30%" }}
           mt={25}
           mb={50}
         />
-        
+
         <Text
           px={10}
           fontSize={[100, 75, 50, 24]}
@@ -169,7 +174,7 @@ function App() {
         >
           Subscribe to receive arrival updates and free hitting advice.
         </Text>
-        
+
         {success && (
           <Text
             color={"green"}
@@ -182,7 +187,7 @@ function App() {
             Successfully subscribed! We will be in touch when updates appear.
           </Text>
         )}
-        
+
         <VStack spacing={5} width={["100%", "70%", "95%", "35%", "35%"]}>
           <FormControl isRequired>
             <FormLabel fontSize={[100, 75, 50, 24]}>First Name</FormLabel>
@@ -199,7 +204,7 @@ function App() {
               placeholderTextColor="white"
             />
           </FormControl>
-          
+
           <FormControl id="lastName" isRequired>
             <FormLabel fontSize={[100, 75, 50, 24]}>Last Name</FormLabel>
             <Input
@@ -215,7 +220,7 @@ function App() {
               placeholderTextColor="white"
             />
           </FormControl>
-          
+
           <FormControl id="email" isRequired>
             <FormLabel fontSize={[100, 75, 50, 24]}>Email Address</FormLabel>
             <Input
@@ -232,7 +237,7 @@ function App() {
               placeholderTextColor="white"
             />
           </FormControl>
-          
+
           {error && (
             <Text
               color="red"
@@ -243,7 +248,7 @@ function App() {
               {errorMsg}
             </Text>
           )}
-          
+
           <Button
             height={"100%"}
             fontSize={[100, 75, 50, 24]}
@@ -287,8 +292,6 @@ function App() {
           </ModalContent>
         </Modal>
       </Center>
-      
-     
     </>
   );
 }
