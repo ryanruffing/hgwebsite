@@ -134,7 +134,7 @@ function App() {
           Now available for iOS!
         </Text>
         <a href="https://apps.apple.com/us/app/hitting-genie/id6478901041" target="_blank" rel="noopener noreferrer">
-          <Image src="appstore.png" alt="Download on the App Store" />
+          <Image src="appStore.png" alt="Download on the App Store" />
         </a>
       </Center>
       
